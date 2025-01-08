@@ -1,5 +1,6 @@
 import mqtt from 'mqtt';
 import React, { useEffect, useState } from 'react'
+import DistanceCom from './distanceCom';
 
 function RemoteController() {
   const [client, setClient] = useState(null);
@@ -127,7 +128,13 @@ const Speedminus = () => { if (client && isConnected) {
       <button className="btn btn-primary btn-sm" onClick={Speedminus}>Speed -</button>
       <div></div>
       <button className="btn btn-primary btn-sm" onClick={Speedplus}>Speed +</button>
+      <div></div>
+   
+      <div></div>
+
+     
     </div>
+    <DistanceCom/>
   </>
 
   )
