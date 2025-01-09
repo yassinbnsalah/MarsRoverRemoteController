@@ -44,7 +44,7 @@ function DistanceCom() {
       }, []);
     
   return (
-    <div class="alert alert-danger" role="alert">Distance :  {messages} CM </div>
+    <div class="alert alert-danger" role="alert">Distance :  {messages} <sup>cm</sup> </div>
   )
 }
 

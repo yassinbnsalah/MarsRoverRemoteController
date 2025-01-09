@@ -1,12 +1,14 @@
 import mqtt from 'mqtt';
 import React, { useEffect, useState } from 'react'
 import DistanceCom from './distanceCom';
+import ImageCom from './imageCom';
+import Base64ImageViewer from './Base64ImageViewer';
 
 function RemoteController() {
   const [client, setClient] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
   const [messages, setMessages] = useState([]);
-
+  //const mqttData = "/9j/4AAQSkZJRgABAQAAAQABAAD/4QDhRXhpZgAATU0AKgAAAAgABQEPAAIAAAANAAAASgEQAAIAAAAiAAAAVwExAAIAAAAKAAAAeQEyAAIAAAAUAAAAg4dpAAQAAAABAAAAlwAAAABSYXNwYmVycnkgUGkAL2Jhc2Uvc29jL2kyYzBtdXgvaTJjQDEvaW14NzA4QDFhAFBpY2FtZXJhMgAyMDI1OjAxOjA4IDEyOjMxOjQ1AAADgpoABQAAAAEAAAC9iCcAAwAAAAEAzwAAkAMAAgAAABQAAADFAADqWgAPQkAyMDI1OjAxOjA4IDEyOjMxOjQ1AP/bAEMAAwICAwICAwMDAwQDAw";
   useEffect(() => {
       const mqttClient = mqtt.connect("wss://broker.hivemq.com:8884/mqtt"); 
       setClient(mqttClient);
@@ -23,10 +25,10 @@ function RemoteController() {
               }
           });
       });
-      mqttClient.on("message", (topic, message) => {
-          console.log(`Message received on ${topic}: ${message.toString()}`);
-          setMessages((prevMessages) => [...prevMessages, message.toString()]);
-      });
+        mqttClient.on("message", (topic, message) => {
+            console.log(`Message received on ${topic}: ${message.toString()}`);
+            setMessages((prevMessages) => [...prevMessages, message.toString()]);
+        });
 
       mqttClient.on("close", () => {
           console.log("Disconnected from MQTT broker");
@@ -135,6 +137,9 @@ const Speedminus = () => { if (client && isConnected) {
      
     </div>
     <DistanceCom/>
+    <button className="btn btn-primary btn-sm" >Get Image </button>
+    <ImageCom className="pt-2"></ImageCom> 
+   
   </>
 
   )
