@@ -115,6 +115,41 @@ const Speedminus = () => { if (client && isConnected) {
       }
   });
 } }
+
+
+const RotateLeft = () => { if (client && isConnected) {
+    const topic = "iotrover/move";
+    client.publish(topic, "q", {}, (err) => {
+        if (err) {
+            console.error("Failed to publish message:", err);
+        } else {
+            console.log(`Message published to ${topic}`);
+        }
+    });
+  } }
+
+  const MiddleFix = () => { if (client && isConnected) {
+    const topic = "iotrover/move";
+    client.publish(topic, "b", {}, (err) => {
+        if (err) {
+            console.error("Failed to publish message:", err);
+        } else {
+            console.log(`Message published to ${topic}`);
+        }
+    });
+  } }
+
+  const RotateRight = () => { if (client && isConnected) {
+    const topic = "iotrover/move";
+    client.publish(topic, "e", {}, (err) => {
+        if (err) {
+            console.error("Failed to publish message:", err);
+        } else {
+            console.log(`Message published to ${topic}`);
+        }
+    });
+  } }
+
   return (<>
     <h1> Rover Mars Remote Controller</h1>
     <div className="d-grid" style={{ gridTemplateColumns: "repeat(3, auto)", gap: "10px", justifyContent: "center", marginTop: "20px" }}>
@@ -130,15 +165,15 @@ const Speedminus = () => { if (client && isConnected) {
       <button className="btn btn-primary btn-sm" onClick={Speedminus}>Speed -</button>
       <div></div>
       <button className="btn btn-primary btn-sm" onClick={Speedplus}>Speed +</button>
-      <div></div>
-   
-      <div></div>
+      <button className="btn btn-primary btn-sm" onClick={RotateLeft}>Rotate Right</button>
+      <button className="btn btn-primary btn-sm" onClick={MiddleFix}>Middle </button>
+      <button className="btn btn-primary btn-sm" onClick={RotateRight}>Rotate Left</button>
 
      
     </div>
     <DistanceCom/>
-    <button className="btn btn-primary btn-sm" >Get Image </button>
-    <ImageCom className="pt-2"></ImageCom> 
+  
+    <ImageCom></ImageCom> 
    
   </>
 

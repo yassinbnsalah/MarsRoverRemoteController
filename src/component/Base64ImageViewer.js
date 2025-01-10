@@ -11,10 +11,13 @@ function Base64ImageViewer({ base64String }) {
             setImageSrc(`data:image/jpeg;base64,${cleanBase64String}`);
         }
       }, [base64String]);
+
       return (
         <div>
-          {imageSrc ? (
-            <img  src={imageSrc} className='container mt-2' alt="Decoded" style={{ maxWidth: '40%' }} />
+          {imageSrc ? (<>
+            <br></br>
+            <img  src={imageSrc} className='container mt-2' alt="Decoded"    style={{ maxWidth: '80%', transform: 'rotate(90deg)', transformOrigin: 'center' }} />
+            </>
           ) : (
             <p>Loading image...</p>
           )}

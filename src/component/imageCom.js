@@ -23,17 +23,13 @@ function ImageCom() {
                       }
                   });
               });
-              mqttClient.on("message", (topic, message) => {
                 mqttClient.on("message", (topic, message) => {
-                    
-                    
-                    console.log(`Message received on ${topic}: ${message.toString()}`);
+                    console.log(`Message received on ${topic}`);
                     setMessages(message.toString());
                 });
-              });
         
               mqttClient.on("close", () => {
-                  console.log("Disconnected from MQTT broker");
+                  console.log("Disconnected from MQTT broker photos");
                   setIsConnected(false);
               });
         
@@ -41,10 +37,29 @@ function ImageCom() {
                   mqttClient.end();
               };    
           }, []);
-        
+        const  sendImageRequest = () =>{
+            const topic = "iotrover/move";
+            client.publish(topic, "p", {}, (err) => {
+                if (err) {
+                    console.error("Failed to publish message:", err);
+                } else {
+                    console.log(`Message published to ${topic}`);
+                }
+            });
+        }
   return (
     <div>
+        
          <Base64ImageViewer base64String={messages} /> 
+
+
+           <button className="btn btn-primary btn-sm" onClick={sendImageRequest}
+            style={{
+                position: "absolute",
+                bottom: "20px",
+                left: "50%",
+                transform: "translateX(-50%)",
+              }}>Get Image </button>
        </div>
   )
 }
